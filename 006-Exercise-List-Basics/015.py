@@ -13,12 +13,12 @@ for i in range(len(deck)):
 
     current_deck = [True if deck[n][i] == 1 else False for n in range(3)]
     if all(current_deck):
-        winner = deck[i][0]
+        winner = deck[0][i]
         break
 
     current_deck = [True if deck[n][i] == 2 else False for n in range(3)]
     if all(current_deck):
-        winner = deck[i][0]
+        winner = deck[0][i]
         break
 
 i = 0

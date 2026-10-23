@@ -21,7 +21,7 @@ for line in range(lines_count):
 
         is_bracket_open = False
 
-if is_balanced:
+if is_balanced and not is_bracket_open:
     print(f"BALANCED")
 else:
     print(f"UNBALANCED")

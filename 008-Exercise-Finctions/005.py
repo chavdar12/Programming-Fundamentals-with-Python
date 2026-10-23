@@ -1,6 +1,6 @@
 # 5! = 5 * 4 * 3 * 2 *1 or 5 * 4!
 def factorial(n):
-    if n == 1:
+    if n <= 1:
         return 1
 
     n_factorial = n * factorial(n - 1)

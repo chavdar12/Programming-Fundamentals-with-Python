@@ -5,24 +5,27 @@ on:
   pull_request:
 
 jobs:
-  check:
+  test:
     runs-on: ubuntu-24.04
-    container: python:3.12-alpine
+    strategy:
+      matrix:
+        python-version: ["3.9", "3.12"]
     steps:
-      - name: Install git
-        run: apk add --no-cache git
-
       - uses: actions/checkout@v4
 
-      - name: Install tools
-        run: pip install ruff
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
 
-      - name: Lint
-        run: ruff check . --exit-zero
+      - name: Install dependencies
+        run: pip install -r requirements.txt
 
-      - name: Check formatting
-        run: ruff format --check . || true
+      - name: Build (byte-compile every script)
+        run: python -m compileall -q .
 
-      - name: Run scripts
-        continue-on-error: true
-        run: for f in *.py; do python "$f"; done
+      - name: Lint (syntax errors and undefined names)
+        run: ruff check . --select E9,F63,F7,F82
+
+      - name: Run tests
+        run: pytest -v tests

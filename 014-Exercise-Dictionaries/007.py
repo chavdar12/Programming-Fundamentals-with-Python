@@ -18,7 +18,7 @@ def arrow(side, user, sides):
             sides[side].append(sides[s].pop(sides[s].index(user)))
             return sides
     
-    sides_data[side].append(user)    
+    sides[side].append(user)
     return sides
         
 

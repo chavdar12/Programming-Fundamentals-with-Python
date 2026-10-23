@@ -18,7 +18,8 @@ while command != "Love!":
     command = input()
 
 print(f"Cupid's last position was {i}.")
-if len(neighborhood) == neighborhood.count(0):
+failed_places = len([h for h in neighborhood if h > 0])
+if failed_places == 0:
     print(f"Mission was successful.")
 else:
-    print(f"Cupid has failed {len(neighborhood) - neighborhood.count(0)} places.")
+    print(f"Cupid has failed {failed_places} places.")

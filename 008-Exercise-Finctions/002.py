@@ -1,9 +1,9 @@
-from math import floor
+from math import floor, hypot
 
 
 def center_point(a, a1, b, b1):
-    a_result = abs(a) + abs(a1)
-    b_result = abs(b) + abs(b1)
+    a_result = hypot(a, a1)
+    b_result = hypot(b, b1)
     if b_result < a_result:
         return b, b1
     return a, a1

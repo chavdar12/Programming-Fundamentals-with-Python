@@ -1,6 +1,6 @@
 import re
 
-pattern = r"%([A-Z][a-z]+)%[^\|\$\.%]*<([\w]+)>[^\|\$\.%]*\|(\d+)\|[^\|\$\.%\d]*(\d+\.?\d+)\$"
+pattern = r"%([A-Z][a-z]+)%[^\|\$\.%]*<([\w]+)>[^\|\$\.%]*\|(\d+)\|[^\|\$\.%\d]*(\d+(?:\.\d+)?)\$"
 line, total_income = input(), 0
 while line != "end of shift":
     line = re.findall(pattern, line)

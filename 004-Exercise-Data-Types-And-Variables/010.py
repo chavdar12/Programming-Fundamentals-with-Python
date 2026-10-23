@@ -1,6 +1,6 @@
 number = int(input())
 is_prime = False
-if number >= 1:
+if number >= 2:
     is_prime = True
     for i in range(2, number):
         if number % i == 0:

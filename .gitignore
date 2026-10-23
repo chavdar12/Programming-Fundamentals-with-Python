@@ -1426,6 +1426,7 @@ dev/tests/functional
 /configuration.php
 /joomla.xml
 /*.txt
+!/requirements.txt
 /robots.txt.dist
 
 

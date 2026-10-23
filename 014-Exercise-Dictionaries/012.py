@@ -21,9 +21,8 @@ while command != "end of submissions":
     
     command = input()
 
-candidates_total_points = {sum(i.values()): u for u, i in contests.items()}
-best_candidate = candidates_total_points[max(candidates_total_points.keys())]
-print(f"Best candidate is {best_candidate} with total {max(candidates_total_points.keys())} points.\nRanking:")
+best_candidate, best_contests = max(contests.items(), key=lambda x: sum(x[1].values()))
+print(f"Best candidate is {best_candidate} with total {sum(best_contests.values())} points.\nRanking:")
 for u, contests_data in sorted(contests.items()):
     print(u)
     for l, p in sorted(contests_data.items(), key=lambda x: -x[1]):

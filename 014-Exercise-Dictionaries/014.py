@@ -3,10 +3,10 @@ def add_submission(user: str, language: str, points: int, results: dict):
         results['users'][user] = []
 
     if language not in results['submissions']:
-        results['submissions'][l] = 0
+        results['submissions'][language] = 0
 
     results['users'][user].append(points)
-    results['submissions'][l] += 1
+    results['submissions'][language] += 1
     return results
 
 

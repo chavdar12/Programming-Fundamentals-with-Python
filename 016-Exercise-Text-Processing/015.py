@@ -1,5 +1,13 @@
-tickets = input().split(", ")
+import re
+
+tickets = input().split(",")
 winning_symbols = ["@", "#", "$", "^"]
+
+
+def longest_run(symbol, half):
+    return max((len(run) for run in re.findall(re.escape(symbol) + "+", half)), default=0)
+
+
 for ticket in tickets:
     ticket = ticket.strip()
     if len(ticket) != 20:
@@ -9,18 +17,13 @@ for ticket in tickets:
     is_found = False
     left_h, right_h = ticket[:10], ticket[10:]
     for s in winning_symbols:
-        if s * 20 in ticket:
+        s_length = min(longest_run(s, left_h), longest_run(s, right_h))
+        if s_length == 10:
             print(f'ticket "{ticket}" - 10{s} Jackpot!')
             is_found = True
             break
 
-        elif s * 6 in left_h and s * 6 in right_h:
-            s_length = 0
-            if left_h.count(s) < right_h.count(s):
-                s_length = left_h.count(s)
-            else:
-                s_length = right_h.count(s)
-
+        elif s_length >= 6:
             print(f'ticket "{ticket}" - {s_length}{s}')
             is_found = True
             break

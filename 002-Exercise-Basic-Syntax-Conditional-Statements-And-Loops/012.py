@@ -2,7 +2,7 @@ d = int(input())
 b = int(input())
 biggest = 0
 
-for n in range(d + 1, b + 1):
+for n in range(d, b + 1):
 
     if not n % d == 0:
         continue

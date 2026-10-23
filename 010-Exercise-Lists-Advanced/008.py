@@ -5,18 +5,18 @@ def find_kate():
                 return [r, c]
 
 
-def check_chain(x, y):
-    if maze[x][y] == 1 and not visited[x][y]:
-        visited[x][y] = True
-        return check_chain(x - 1, y) + check_chain(x + 1, y) + check_chain(x, y - 1) + check_chain(x, y + 1)
-    return 1 if maze[x][y] == 2 else 0
-
-
 def moves_count(x, y):
-    if maze[x][y] == 1 and not visited[x][y]:
-        visited[x][y] = True
-        return moves_count(x - 1, y) + moves_count(x + 1, y) + moves_count(x, y - 1) + moves_count(x, y + 1) + 1
-    return 0
+    # longest simple path from (x, y) to outside the maze, None if there is no way out
+    if maze[x][y] == 2:
+        return 0
+    if maze[x][y] != 1 or visited[x][y]:
+        return None
+
+    visited[x][y] = True
+    paths = [moves_count(x + dx, y + dy) for dx, dy in ((-1, 0), (1, 0), (0, -1), (0, 1))]
+    visited[x][y] = False
+    paths = [p for p in paths if p is not None]
+    return max(paths) + 1 if paths else None
 
 
 initial_maze = [list(f"#{input()}#") for _ in range(int(input()))]
@@ -30,10 +30,8 @@ for i in range(len(maze)):
 visited = [[False for _ in range(len(maze[0]))] for _ in range(len(maze))]
 x1, y1 = find_kate()
 maze[x1 + 1][y1] = 1
-is_out = check_chain(x1 + 1, y1)
-if not is_out:
+moves = moves_count(x1 + 1, y1)
+if moves is None:
     print(f"Kate cannot get out")
 else:
-    visited = [[False for _ in range(len(maze[0]))] for _ in range(len(maze))]
-    moves = moves_count(x1 + 1, y1)
     print(f"Kate got out in {moves} moves")

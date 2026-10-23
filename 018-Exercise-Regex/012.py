@@ -1,8 +1,8 @@
 import re
 
 planets = {"A": [], "D": []}
-star_pattern = r"[s, t, a, r]"
-planets_pattern = r"@([A-Za-z]+)[^>!@:-]*:(\d+)!([A|D])![^>!@:-]*->(\d+)"
+star_pattern = r"[star]"
+planets_pattern = r"@([A-Za-z]+)[^@\-!:>]*:(\d+)[^@\-!:>]*!([AD])![^@\-!:>]*->(\d+)"
 for _ in range(int(input())):
     line = input()
     c = len(re.findall(star_pattern, line, re.IGNORECASE))

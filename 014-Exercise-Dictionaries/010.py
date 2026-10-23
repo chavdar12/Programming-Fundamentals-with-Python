@@ -10,14 +10,12 @@ def add_player(pl, pos, sk, pool):
 
 
 def fight(pl1, pl2, pool):
-    equal_positions = [f for f in pool[pl1].keys() for s in pool[pl2].keys() if f == s]
-    for pos in equal_positions:
-        if pool[pl1][pos] < pool[pl2][pos]:
+    if pool[pl1].keys() & pool[pl2].keys():
+        pl1_total, pl2_total = sum(pool[pl1].values()), sum(pool[pl2].values())
+        if pl1_total < pl2_total:
             del pool[pl1]
-            break
-        elif pool[pl2][pos] < pool[pl1][pos]:
+        elif pl2_total < pl1_total:
             del pool[pl2]
-            break
 
     return pool
 

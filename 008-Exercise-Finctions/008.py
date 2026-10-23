@@ -1,17 +1,17 @@
-from math import floor
+from math import floor, hypot
 
 
 def center_point(a, a1, b, b1):
-    a_result = abs(a) + abs(a1)
-    b_result = abs(b) + abs(b1)
+    a_result = hypot(a, a1)
+    b_result = hypot(b, b1)
     if b_result < a_result:
         return b, b1, a, a1
     return a, a1, b, b1
 
 
 def longer_line(a, a1, a2, a3, b, b1, b2, b3):
-    a_line = abs(a) + abs(a1) + abs(a2) + abs(a3)
-    b_line = abs(b) + abs(b1) + abs(b2) + abs(b3)
+    a_line = hypot(a - a2, a1 - a3)
+    b_line = hypot(b - b2, b1 - b3)
     if a_line >= b_line:
         return a, a1, a2, a3
     return b, b1, b2, b3
